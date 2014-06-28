@@ -6,17 +6,28 @@
 
 package clientsocket;
 
+import java.io.IOException;
+import java.net.Socket;
+
+
 /**
  *
  * @author Ali
  */
 public class ClientSocket {
-
-    /**
-     * @param args the command line arguments
-     */
+   
     public static void main(String[] args) {
-        // can you see this?
+        final String host = "127.0.0.1";
+        Socket socket;
+        int port = 8003;
+        System.out.println("CREATING THE CONNECTION\n");
+        try {
+            socket = new Socket(host, port);
+            socket.close();
+        } catch (IOException ex) {
+            System.out.println("Could not create socket: " + ex.getMessage());
+        }
+        
     }
     
 }
