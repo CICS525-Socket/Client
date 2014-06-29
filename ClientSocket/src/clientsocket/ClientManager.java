@@ -36,7 +36,7 @@ public class ClientManager {
         String userInput = "dummi";
         while(!userInput.equals("close")){
             System.out.println("Enter command:");
-            userInput = userInputScanner.next();
+            userInput = userInputScanner.nextLine();
             sendRequest(userInput);
             receiveResponse();
         }
@@ -58,9 +58,10 @@ public class ClientManager {
         System.out.println("\n Server Response:");
         while (in.hasNextLine()) {
             String input = in.nextLine();
-            System.out.println(input);
-            if (input.equals("\n\n")) {
+            if (input.equals("end")) {
                 break;
+            } else {
+                System.out.println(input);
             }
         }
     }
