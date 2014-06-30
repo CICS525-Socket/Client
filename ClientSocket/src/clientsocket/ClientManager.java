@@ -165,7 +165,7 @@ public class ClientManager {
 	}
 
 	private boolean validateUserInput(String username) {
-		String[] comps = username.split(" ");
+		String[] comps = username.split("\\s+");
 		if (comps.length == 2 && comps[0].equals("USER") && comps[1].length()>2
 				&& comps[1].startsWith("<") && comps[1].endsWith(">")) {
 			return true;
@@ -174,7 +174,7 @@ public class ClientManager {
 	}
 
 	private String getUsername(String username) {
-		String[] comps = username.split(" ");
+		String[] comps = username.split("\\s+");
 		return comps[1].substring(1, comps[1].length() - 1);
 	}
 }
