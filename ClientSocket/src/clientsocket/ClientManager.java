@@ -39,7 +39,7 @@ public class ClientManager {
 		while (!validUsername) {
 			System.out
 					.println("Enter your name in the format USER <username>: ");
-			userInput = userInputScanner.nextLine();
+			userInput = userInputScanner.nextLine().trim();
 			validUsername = validateUserInput(userInput);
 		}
 		String username = getUsername(userInput);
@@ -51,7 +51,7 @@ public class ClientManager {
 			System.out
 					.println("follow - to view info on a particular stock. You need to know the tickername \t close - to exit");
 			System.out.println("\nEnter command:");
-			userInput = userInputScanner.nextLine();
+			userInput = userInputScanner.nextLine().trim();
 
 			if (userInput.equalsIgnoreCase("follow")) {
 				sendRequest("follow");
@@ -102,14 +102,16 @@ public class ClientManager {
 	}
 
 	private void requestStock() {
-		System.out.println("Enter stock tickername in this form QUERY <TICKERNAME> or q to quit: ");
-		String userInput = userInputScanner.nextLine();
+		System.out
+				.println("Enter stock tickername in this form QUERY <TICKERNAME> or q to quit: ");
+		String userInput = userInputScanner.nextLine().trim();
 		while (true) {
 			if (!userInput.equals("q")) {
 				sendRequest(userInput);
 				receiveResponse();
-				System.out.println("Enter stock tickername in this form QUERY <TICKERNAME> or q to quit: ");
-				userInput = userInputScanner.nextLine();
+				System.out
+						.println("Enter stock tickername in this form QUERY <TICKERNAME> or q to quit: ");
+				userInput = userInputScanner.nextLine().trim();
 			} else {
 				sendRequest("reset");
 				receiveResponse();
@@ -121,14 +123,14 @@ public class ClientManager {
 	private void buyStock() {
 		System.out
 				.println("Enter command in the form BUY <tickername> <no> or q to quit: ");
-		String userInput = userInputScanner.nextLine();
+		String userInput = userInputScanner.nextLine().trim();
 		while (true) {
 			if (!userInput.equals("q")) {
 				sendRequest(userInput);
 				receiveResponse();
 				System.out
 						.println("Enter command in the form BUY <tickername> <no> or q to quit: ");
-				userInput = userInputScanner.nextLine();
+				userInput = userInputScanner.nextLine().trim();
 			} else {
 				sendRequest("reset");
 				receiveResponse();
@@ -140,14 +142,14 @@ public class ClientManager {
 	private void sellStock() {
 		System.out
 				.println("Enter command in the form SELL <TICKERNAME> <NO> or q to quit: ");
-		String userInput = userInputScanner.nextLine();
+		String userInput = userInputScanner.nextLine().trim();
 		while (true) {
 			if (!userInput.equals("q")) {
 				sendRequest(userInput);
 				receiveResponse();
 				System.out
 						.println("Enter command in the form SELL <TICKERNAME> <NO> or q to quit: ");
-				userInput = userInputScanner.nextLine();
+				userInput = userInputScanner.nextLine().trim();
 			} else {
 				sendRequest("reset");
 				receiveResponse();
@@ -166,8 +168,9 @@ public class ClientManager {
 
 	private boolean validateUserInput(String username) {
 		String[] comps = username.split("\\s+");
-		if (comps.length == 2 && comps[0].equals("USER") && comps[1].length()>2
-				&& comps[1].startsWith("<") && comps[1].endsWith(">")) {
+		if (comps.length == 2 && comps[0].equalsIgnoreCase("USER")
+				&& comps[1].length() > 2 && comps[1].startsWith("<")
+				&& comps[1].endsWith(">")) {
 			return true;
 		}
 		return false;
