@@ -33,7 +33,7 @@ public class ClientManager {
 			userInput = userInputScanner.nextLine().trim();
 			validUsername = validateUserInput(userInput);
 		}
-		String username = getUsername(userInput);
+		String username = userInput;
 		sendRequest(username);
 
 		while (!userInput.equals("close")) {
@@ -163,10 +163,5 @@ public class ClientManager {
 			return true;
 		}
 		return false;
-	}
-
-	private String getUsername(String username) {
-		String[] comps = username.split("\\s+");
-		return comps[1].substring(1, comps[1].length() - 1);
-	}
+	}	
 }
