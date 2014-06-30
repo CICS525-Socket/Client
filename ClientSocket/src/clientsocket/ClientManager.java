@@ -33,12 +33,16 @@ public class ClientManager {
 	}
 
 	private void clientRun() {
-		String userInput = "Ali";
+		String userInput = "Jasmine";
 		// I modified this line
 		sendRequest(userInput);
 		// modification ended here
 
 		while (!userInput.equals("close")) {
+			System.out
+					.println("Type buy - to buy stocks \t sell - to sell stocks \t checkportfolio - to view your stocks");
+			System.out
+					.println("follow - to view info on a particular stock. You need to know the tickername \t close - to exit");
 			System.out.println("\nEnter command:");
 			userInput = userInputScanner.nextLine();
 
@@ -72,7 +76,7 @@ public class ClientManager {
 	}
 
 	private void receiveResponse() {
-		System.out.println("\n Server Response:");
+		System.out.println("\nSERVER RESPONSE:");
 
 		if (in.hasNext()) {
 			while (in.hasNextLine()) {
@@ -87,7 +91,7 @@ public class ClientManager {
 		} else {
 			receiveResponse();
 		}
-
+		System.out.println("");
 	}
 
 	private void requestStock() {
@@ -109,7 +113,7 @@ public class ClientManager {
 
 	private void buyStock() {
 		System.out
-				.println("Enter command int he form BUY <tickername> <no> or q to quit: ");
+				.println("Enter command in the form BUY <tickername> <no> or q to quit: ");
 		String userInput = userInputScanner.nextLine();
 		while (true) {
 			if (!userInput.equals("q")) {
