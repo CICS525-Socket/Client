@@ -33,7 +33,7 @@ public class ClientManager {
 	}
 
 	private void clientRun() {
-		String userInput = "Jasmine";
+		String userInput = "Lota";
 		// I modified this line
 		sendRequest(userInput);
 		// modification ended here
