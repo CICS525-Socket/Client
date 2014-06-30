@@ -33,10 +33,17 @@ public class ClientManager {
 	}
 
 	private void clientRun() {
-		String userInput = "Lota";
-		// I modified this line
-		sendRequest(userInput);
-		// modification ended here
+
+		boolean validUsername = false;
+		String userInput = "default";
+		while (!validUsername) {
+			System.out
+					.println("Enter your name in the format USER <username>: ");
+			userInput = userInputScanner.nextLine();
+			validUsername = validateUserInput(userInput);
+		}
+		String username = getUsername(userInput);
+		sendRequest(username);
 
 		while (!userInput.equals("close")) {
 			System.out
@@ -95,13 +102,13 @@ public class ClientManager {
 	}
 
 	private void requestStock() {
-		System.out.println("Enter stock tickername or q to quit: ");
+		System.out.println("Enter stock tickername in this form QUERY <TICKERNAME> or q to quit: ");
 		String userInput = userInputScanner.nextLine();
 		while (true) {
 			if (!userInput.equals("q")) {
 				sendRequest(userInput);
 				receiveResponse();
-				System.out.println("Enter stock tickername or q to quit: ");
+				System.out.println("Enter stock tickername in this form QUERY <TICKERNAME> or q to quit: ");
 				userInput = userInputScanner.nextLine();
 			} else {
 				sendRequest("reset");
@@ -155,5 +162,19 @@ public class ClientManager {
 		inStream.close();
 		outStream.close();
 		socket.close();
+	}
+
+	private boolean validateUserInput(String username) {
+		String[] comps = username.split(" ");
+		if (comps.length == 2 && comps[0].equals("USER") && comps[1].length()>2
+				&& comps[1].startsWith("<") && comps[1].endsWith(">")) {
+			return true;
+		}
+		return false;
+	}
+
+	private String getUsername(String username) {
+		String[] comps = username.split(" ");
+		return comps[1].substring(1, comps[1].length() - 1);
 	}
 }
