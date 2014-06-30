@@ -95,8 +95,6 @@ public class ClientManager {
 				}
 			}
 
-		} else {
-			receiveResponse();
 		}
 		System.out.println("");
 	}
