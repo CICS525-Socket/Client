@@ -33,7 +33,7 @@ public class ClientManager {
 	}
 
 	private void clientRun() {
-		String userInput = "yanki4";
+		String userInput = "yanki3";
 		// I modified this line
 		sendRequest(userInput);
 		// modification ended here
@@ -45,6 +45,9 @@ public class ClientManager {
 			if (userInput.equals("follow")) {
 				sendRequest("follow");
 				requestStock();
+			} else if(userInput.equals("buy")) {
+				sendRequest("buy");
+				buyStock();
 			} else {
 				sendRequest(userInput);
 				receiveResponse();
@@ -92,6 +95,25 @@ public class ClientManager {
 				sendRequest(userInput);
 				receiveResponse();
 				System.out.println("Enter stock tickername or q to quit: ");
+				userInput = userInputScanner.nextLine();
+			} else {
+				sendRequest("reset");
+				receiveResponse();
+				break;
+			}
+		}
+	}
+
+	private void buyStock() {
+		System.out
+				.println("Enter command int he form BUY <tickername> <no> or q to quit: ");
+		String userInput = userInputScanner.nextLine();
+		while (true) {
+			if (!userInput.equals("q")) {
+				sendRequest(userInput);
+				receiveResponse();
+				System.out
+						.println("Enter command int he form BUY <tickername> <no> or q to quit: ");
 				userInput = userInputScanner.nextLine();
 			} else {
 				sendRequest("reset");
