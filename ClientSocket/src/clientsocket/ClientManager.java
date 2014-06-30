@@ -33,7 +33,7 @@ public class ClientManager {
 	}
 
 	private void clientRun() {
-		String userInput = "yanki3";
+		String userInput = "Ali";
 		// I modified this line
 		sendRequest(userInput);
 		// modification ended here
@@ -42,12 +42,15 @@ public class ClientManager {
 			System.out.println("\nEnter command:");
 			userInput = userInputScanner.nextLine();
 
-			if (userInput.equals("follow")) {
+			if (userInput.equalsIgnoreCase("follow")) {
 				sendRequest("follow");
 				requestStock();
-			} else if(userInput.equals("buy")) {
+			} else if (userInput.equalsIgnoreCase("buy")) {
 				sendRequest("buy");
 				buyStock();
+			} else if (userInput.equalsIgnoreCase("sell")) {
+				sendRequest("sell");
+				sellStock();
 			} else {
 				sendRequest(userInput);
 				receiveResponse();
@@ -113,7 +116,26 @@ public class ClientManager {
 				sendRequest(userInput);
 				receiveResponse();
 				System.out
-						.println("Enter command int he form BUY <tickername> <no> or q to quit: ");
+						.println("Enter command in the form BUY <tickername> <no> or q to quit: ");
+				userInput = userInputScanner.nextLine();
+			} else {
+				sendRequest("reset");
+				receiveResponse();
+				break;
+			}
+		}
+	}
+
+	private void sellStock() {
+		System.out
+				.println("Enter command in the form SELL <TICKERNAME> <NO> or q to quit: ");
+		String userInput = userInputScanner.nextLine();
+		while (true) {
+			if (!userInput.equals("q")) {
+				sendRequest(userInput);
+				receiveResponse();
+				System.out
+						.println("Enter command in the form SELL <TICKERNAME> <NO> or q to quit: ");
 				userInput = userInputScanner.nextLine();
 			} else {
 				sendRequest("reset");
