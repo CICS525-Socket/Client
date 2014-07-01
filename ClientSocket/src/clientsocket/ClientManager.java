@@ -86,6 +86,8 @@ public class ClientManager {
 				}
 			}
 
+		} else {
+			receiveResponse();
 		}
 		System.out.println("");
 	}
@@ -148,6 +150,7 @@ public class ClientManager {
 	}
 
 	private void closeConnection() throws IOException {
+		sendRequest("close");
 		in.close();
 		out.close();
 		inStream.close();
